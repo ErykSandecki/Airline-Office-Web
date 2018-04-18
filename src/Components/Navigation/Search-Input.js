@@ -52,7 +52,10 @@ export default class SearchInput extends Component {
             this.setState({
                 showSuggestionArea: false
             })
-            this.props.hideOnInput();
+            if(this.props.blurForDeskopt){
+                this.props.hideOnInput();
+            }
+            
         }
     }
 

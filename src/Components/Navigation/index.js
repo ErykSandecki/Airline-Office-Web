@@ -5,17 +5,20 @@ import GlyphiconArrowRightBlack from '../../Images/Glyphicon-Arrow-Right-Black.p
 import GlyphiconDropDownShow from '../../Images/Glyphicon-Drop-Down-Show.png';
 import GlyphiconDropDown from '../../Images/Glyphicon-Drop-Down.png';
 import GlyphiconHead from '../../Images/Glyphicon-Head.png';
+import GlyphiconHeadBlack from '../../Images/Glyphicon-Head-Black.png';
 import GlyphiconSearch from '../../Images/Glyphicon-Search.png';
 import IconTravel from '../../Images/Icon-Logo.png';
 import LanguageAndLocation from './Language-Location.js';
 import SearchInput from './Search-Input.js';
+import LoginMenu from './Login-Menu.js';
 export default class Navigation extends Component { 
 
     constructor(props) {
         super(props);
         this.state = {
             vissible: false,
-            vissibleInputSearch : false,
+            vissibleInputSearch: false,
+            vissibleLogin: false,
         }
         this.hideOnInput = this.hideOnInput.bind(this);
     }
@@ -24,7 +27,8 @@ export default class Navigation extends Component {
         if(this.props.vissible){
             this.setState({
                 vissible: false,
-                vissibleInputSearch: false
+                vissibleInputSearch: false,
+                vissibleLogin: false
             })
         }
     }
@@ -38,13 +42,20 @@ export default class Navigation extends Component {
     
     showOnInput(){
         this.setState({
-            vissibleInputSearch : true
+            vissibleInputSearch: true
         })
     }
 
     showOnInputMobileTablet(){
         this.setState({
-            vissibleInputSearch : true
+            vissibleInputSearch: true
+        })
+        this.props.setBody();
+    }
+
+    showLoginMenu() {
+        this.setState({
+            vissibleLogin: true
         })
         this.props.setBody();
     }
@@ -79,15 +90,22 @@ export default class Navigation extends Component {
                     <div onClick={this.showOnInputMobileTablet.bind(this)} className={this.props.vissible && this.state.vissibleInputSearch ? "glyphicon glyphicon-search glyphicon-search-vissible" :"glyphicon glyphicon-search"}></div>
                     {this.props.vissible && this.state.vissibleInputSearch ?
                         <div className="search-mobile-tablet">
-                            <SearchInput language={this.props.language} hideOnInput={this.hideOnInput}/>
+                            <SearchInput language={this.props.language} blurForDeskopt={false}/>
                         </div>
                         : null
                     }
                 </div>
-                <div className={window.innerWidth > 1024 ? "nav-options" : this.props.vissible && this.state.vissible ? "nav-options-vissible" : "nav-options"}>
+                <div>
+                    <div onClick={this.showLoginMenu.bind(this)} className={this.props.vissible && this.state.vissibleLogin ? "glyphicon glyphicon-user glyphicon-user-vissible " :"glyphicon glyphicon-user"}></div>
+                    {window.innerWidth < 1024 && this.props.vissible && this.state.vissibleLogin ?
+                        <LoginMenu language={this.props.language}/>
+                        : null    
+                    }
+                </div>
+                <div className={window.innerWidth > 1023 ? "nav-options" : this.props.vissible && this.state.vissible ? "nav-options-vissible" : "nav-options"}>
                     <div className={this.props.vissible && this.state.vissible ? "section-location-language-vissible" : "section-location-language"}>
                         <p className="text-hide-location-and-language" 
-                            onClick={this.toggleButton.bind(this)}>{window.innerWidth > 1024 ?
+                            onClick={this.toggleButton.bind(this)}>{window.innerWidth > 1023 ?
                                 this.props.location +
                                 " | " +
                                 (this.props.language === 'Polski' ?
@@ -108,8 +126,8 @@ export default class Navigation extends Component {
                         />    
                     </div>
                     <div className="section-help-contact">
-                            <img alt="glyphicon-arrow-right" src={window.innerWidth > 1024 ? GlyphiconArrowRight : GlyphiconArrowRightBlack}/>
-                            {window.innerWidth > 1024 ?
+                            <img alt="glyphicon-arrow-right" src={window.innerWidth > 1023 ? GlyphiconArrowRight : GlyphiconArrowRightBlack}/>
+                            {window.innerWidth > 1023 ?
                                 <a href="../../../public/Help-Contact.html">{this.props.language === 'Polski' ?
                                     " Pomoc i Kontakt"
                                     : " Help & Contact"
@@ -127,7 +145,7 @@ export default class Navigation extends Component {
                     </div>
                     <div className="section-miles-more">
                             <img alt="glyphicon-arrow-right" src={window.innerWidth > 1024 ? GlyphiconArrowRight : GlyphiconArrowRightBlack}/>
-                            {window.innerWidth > 1024 ?
+                            {window.innerWidth > 1023 ?
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.miles-and-more.com/online/portal/mam/pl/homepage?l=pl&cid=1000340">
                                     Miles & More
                                 </a>                                     
@@ -139,16 +157,30 @@ export default class Navigation extends Component {
                             }
                     </div>
                     <div className="search">
-                        {window.innerWidth > 1024 ?
+                        {window.innerWidth > 1023 ?
                         <div>
                         {this.state.vissibleInputSearch ?  
-                            <SearchInput language={this.props.language} hideOnInput={this.hideOnInput}/> 
+                            <SearchInput language={this.props.language} hideOnInput={this.hideOnInput} blurForDeskopt={true}/> 
                         :<p onClick={this.showOnInput.bind(this)} className="text-search">{this.props.language === "Polski" ? "Szukaj " : "Search "}<img alt="glyphicon-search" src={GlyphiconSearch}/></p>}   
                         </div>
                         :null
                         }
                        
                     </div>
+                    
+                </div>
+                <div className="down-options-drop">
+                        <div>
+                            <div onClick={this.showLoginMenu.bind(this)} className={this.props.vissible && this.state.vissibleLogin ? "down-login-vissible" : "down-login"}>
+                                <img alt="glyphicon-head" src={this.props.vissible && this.state.vissibleLogin ? GlyphiconHeadBlack : GlyphiconHead } />
+                                <p className="login-text-down"> {this.props.language === "Polski" ? 
+                                      "Zaloguj"
+                                    : "Login"
+                                    }
+                                </p>
+                            </div>
+                            {window.innerWidth >1023 && this.props.vissible && this.state.vissibleLogin ?<LoginMenu /> : null}
+                        </div>
                 </div>
             </div>
         </nav>

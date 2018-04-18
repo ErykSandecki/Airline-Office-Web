@@ -6,8 +6,8 @@ import PicturePresentation from './Images/Picture-Presenatation.png'
 class App extends Component {
   location;
   language;
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.getLocalStorage();
     this.setBody = this.setBody.bind(this);
     this.setLocationAndLanguage = this.setLocationAndLanguage.bind(this);
