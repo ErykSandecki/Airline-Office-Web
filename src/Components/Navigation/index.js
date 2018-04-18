@@ -12,14 +12,21 @@ export default class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            vissible: this.props.vissible,
+            vissible: false
         }
     }
 
-    toggleButton(location, language, saveChange) {
-        document.querySelector('.button-mobile-tablet').classList.toggle('change');
+    componentWillReceiveProps() {
+        if(this.props.vissible){
+            this.setState({
+                vissible: false
+            })
+        }
+    }
+
+    toggleButton() {
         this.setState({
-            vissible : !this.state.vissible
+            vissible: !this.state.vissible
         })
         this.props.setBody();
     }   
@@ -34,30 +41,32 @@ export default class Navigation extends Component {
                 <p className="text-logo">World Travel</p>
             </div>
             <div className="attributes-navigation">
-                <div className="button-mobile-tablet" onClick={this.toggleButton.bind(this)}>
+                <div className={this.props.vissible && this.state.vissible ? "button-mobile-tablet change" :"button-mobile-tablet"} onClick={this.toggleButton.bind(this)}>
                     <div className="bar1"></div>
                     <div className="bar2"></div>
                     <div className="bar3"></div>
                 </div>
-                <div className={this.state.vissible ? "nav-options-vissible" : "nav-options"}>
-                    <div className={this.state.vissible ? "section-location-language-vissible" : "section-location-language"}>
-                        <p className="text-hide-location-and-language" onClick={this.toggleButton.bind(this)}>{window.innerWidth > 1024 ?
-                            this.props.location +
-                            " | " +
-                            (this.props.language === 'Polski' ?
-                                "Polski  "
-                                : "English  "
-                            )                                  
-                            : null    
+                <div className={this.props.vissible && this.state.vissible ? "nav-options-vissible" : "nav-options"}>
+                    <div className={this.props.vissible && this.state.vissible ? "section-location-language-vissible" : "section-location-language"}>
+                        <p className="text-hide-location-and-language" 
+                            onClick={this.toggleButton.bind(this)}>{window.innerWidth > 1024 ?
+                                this.props.location +
+                                " | " +
+                                (this.props.language === 'Polski' ?
+                                    "Polski  "
+                                    : "English  "
+                                )                                     
+                                : null    
                             }
-                            <img src={this.state.vissible ? GlyphiconDropDownShow : GlyphiconDropDown}/> 
+                            <img src={this.props.vissible ? GlyphiconDropDownShow : GlyphiconDropDown}/> 
                         </p>
                         <LanguageAndLocation 
-                            vissible={this.state.vissible} 
+                            vissible={this.state.vissible}
+                            vissibleBody={this.props.vissible} 
                             setLocationAndLanguage={this.props.setLocationAndLanguage}  
                             toggleButton={this.toggleButton.bind(this)} 
                             language={this.props.language} 
-                            location={this.props.location} 
+                            location={this.props.location}
                         />    
                     </div>
                 </div>

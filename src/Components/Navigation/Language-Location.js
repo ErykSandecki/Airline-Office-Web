@@ -10,7 +10,6 @@ export default class LanguageAndLocation extends Component {
             location: this.props.location,
             language: this.props.language,
             saveChange: false,
-            vissible: this.props.vissible
         }
     }
 
@@ -39,7 +38,7 @@ export default class LanguageAndLocation extends Component {
 
     render(){
         return(
-            <div className={this.state.vissible ? "change-settings-language-or-location-vissible" : "change-settings-language-or-location"}> 
+            <div className={this.props.vissibleBody && this.props.vissible ? "change-settings-language-or-location-vissible" : "change-settings-language-or-location"}> 
                 <p className="language-or-location-title" >Flying with World Travel</p>
                 <div className="form-group col-xs-12 col-md-6">
                     <select onChange={this.handleChangeLocation.bind(this)} value={this.state.location} className="form-country-and-language col-xs-12">

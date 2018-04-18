@@ -34,7 +34,7 @@ class App extends Component {
 
   setBody() {
     this.setState({
-      visible: !this.state.visible
+      vissible: !this.state.vissible
     })
   }
 
@@ -70,7 +70,7 @@ class App extends Component {
     return (
       <div>
         <div 
-          className={this.state.visible === true ? "hide-body-active": ""} 
+          className={this.state.vissible ? "hide-body-active": "body-active"} 
           onClick={this.hideAllElement.bind(this)}>
         </div>
         <Navigation 
