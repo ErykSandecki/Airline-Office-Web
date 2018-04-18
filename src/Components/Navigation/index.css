@@ -42,6 +42,104 @@
   transition: 0.5s;
 }
 
+.glyphicon-search {
+  color: white;
+  float: right;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.glyphicon-search:hover {
+  cursor: pointer;
+}
+
+.glyphicon-search-vissible {
+  background-color: white;
+  color: #000;
+  float: right;
+  z-index: 2;
+}
+
+.search-mobile-tablet {
+  position: absolute;
+  height: 50px;
+  background-color: white;
+  top: 60px;
+  width: 232px;
+  right: 0px;
+  z-index: 2;
+}
+
+.search-mobile-tablet input{
+  position: relative;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+}
+
+/* Sugestion search*/
+
+.arrow-suggestion-hide {
+  display: none;
+}
+
+.arrow-suggestion {
+  position: absolute;
+  top: 50px;
+  display: block;
+  left: 10%;
+}
+
+.sugestion-search-hide{
+  display: none;
+}
+
+.sugestion-search {
+  display: block;
+  max-height: 180px;
+  overflow: auto;
+  background-color:rgb(231, 231, 231);
+  color: gainsboro;
+  position: absolute;
+  z-index: 1;
+  top: 70px;
+  width: 80%;
+  left: 10%;
+  right: 10%;
+  box-shadow: 0 0 15px gray;
+  text-align: center
+}
+.content-suggestion{
+  background-color:rgb(231, 231, 231);
+  padding-top: 10px;
+  filter: brightness(100%);
+  transition: all .3s ease-in-out;
+}
+.content-suggestion:hover{
+  filter: brightness(70%);
+  transition: all .3s ease-in-out;
+}
+
+.sugestion-search a {
+  color: black;
+}
+
+.sugestion-search a:hover {
+  text-decoration: unset;
+}
+
+.underline-sugesstion{
+  height: 1px;
+  width: 100%;
+  background-color: whitesmoke;
+  margin-top: 10px;
+}
+
+.show-more p {
+  color: blue;
+}
+
 /* Button for mobile */
 
 .button-mobile-tablet {
@@ -80,6 +178,14 @@
   background-color: black;
 }
 
+.button-text {
+  display: none;
+}
+
+.button-text-change{
+  display: none;
+}
+
 /*!!!!!!!! Section attributes navigation !!!!!!!!!*/
 
 .nav-options{
@@ -116,6 +222,7 @@
   padding: 10px;
   z-index: 2;
   right: 0px;
+  top: 50px;
   padding-right: 20px;
 }
 
@@ -162,6 +269,67 @@
   font-weight: bold;
 }
 
+/* Section help and Contact */
+
+.section-help-contact {
+  color: white;
+  position: absolute;
+  background-color: #f5f5f5;
+  top: 20px;
+  width: 350px;
+  z-index: 2;
+  right: 0px;
+}
+.section-help-contact img {
+  float: left;
+  margin: 5px 5px 0px 25px;
+}
+.section-help-contact a {
+  float: left;
+  color: #414e63;
+  margin-top: 2px;
+}
+
+.section-help-contact a:hover {
+  text-decoration: unset;
+}
+
+.section-help-contact div p {
+  background-color: darkgray;
+  width: 350px;
+  height: 2px;
+  float: right;
+}
+
+/*Section Miles & More*/
+.section-miles-more{
+  color: white;
+  position: absolute;
+  background-color: #f5f5f5;
+  top: 0px;
+  width: 350px;
+  z-index: 2;
+  right: 0px;
+}
+
+.section-miles-more img {
+  float: left;
+  margin: 5px 5px 0px 25px;
+}
+.section-miles-more a {
+  float: left;
+  color: #414e63;
+  margin-top: 2px;
+}
+
+.section-miles-more a:hover {
+  text-decoration: unset;
+}
+
+.section-miles-more a:focus {
+  text-decoration: unset;
+}
+
 /* Section Presentation */ 
 
 .presentation img {
@@ -183,14 +351,67 @@
     font-size: 20px;
     margin: 35px 0px 0px 20px;
   }
-
+  
+  /*  Button mobile tablet*/
   .button-mobile-tablet {
     padding: 28px;
   }
 
-  .change-settings-language-or-location-vissible {
-   top: 35px;
+  .button-text {
+    display: block;
+    color: white;
+    margin-top: 9px;
+    padding-left: 2px;
   }
+
+  .button-text-change {
+    color: black;
+    margin-top: 9px;
+    padding-left: 2px;
+    display: block;
+  }
+
+  .change-settings-language-or-location-vissible {
+   top: 87px;
+  }
+
+  .glyphicon-search {
+    font-size: 30px;
+    padding: 32px;
+  }
+
+  .glyphicon-search-vissible {
+    padding: 32px;
+  }
+
+  .search-mobile-tablet {
+    top: 95px;
+    width: 440.06px;
+    height: 100px;
+  }
+
+  .search-mobile-tablet input {
+    height: 50px;
+    font-size: 20px;
+    margin-top: 25px;
+  }
+
+  .arrow-suggestion {
+    top: 100px;
+  }
+
+  .sugestion-search {
+    top: 120px;
+  }
+  /* Section help and Contact */
+
+.section-help-contact {
+  top: 55px;
+}
+
+.section-miles-more {
+  top: 35px;
+}
 }
 
 @media only screen and (min-width: 1024px) { 
@@ -212,6 +433,10 @@
     display: none;
   } 
 
+  .glyphicon-search {
+    display: none;
+  }
+
   /*!!!!!!!! Section attributes navigation !!!!!!!!!*/
 
 .nav-options {
@@ -231,9 +456,13 @@
   margin: 10px 10px 0px 0px;
   z-index: 2;
 }
+
+/* Language or Location */
+
 .section-location-language {
-  opacity: 0.7;
   padding: 5px;
+  float: left;
+  color: white;
 }
 
 .section-location-language-vissible {
@@ -244,12 +473,14 @@
   opacity: 1;
   padding: 5px;
   z-index: 2;
+  color: black;
   background-color: white;
 }
 
 .text-hide-location-and-language {
   display: block;
   opacity: 0.7;
+  margin-bottom: 0px;
 }
 
 .text-hide-location-and-language:hover {
@@ -270,6 +501,122 @@
 
 .language-or-location-button-submit {
   width: 100px;
+}
+
+/*Section help and contact*/
+.section-help-contact {
+  float: left;
+  opacity: 0.7;
+  padding: 5px;
+  background-color: unset;
+  width: unset;
+  height: unset;
+  position: static;
+}
+
+.section-help-contact:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.section-help-contact a {
+  color: white;
+  margin-top: 0px;
+}
+
+/* Section miles more*/ 
+
+.section-miles-more {
+  float: left;
+  opacity: 0.7;
+  padding: 5px;
+  background-color: unset;
+  width: unset;
+  height: unset;
+  position: static;
+}
+.section-miles-more:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.section-miles-more a {
+  color: white;
+  margin-top: 0px;
+}
+
+/*Section search input*/
+
+.search {
+  float: left;
+  padding: 5px;
+  background-color: unset;
+  width: unset;
+  height: unset;
+  position: relative;
+  top: unset;
+  right: unset;
+}
+
+.search p:hover  {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.hide-input-search{
+  display: none;
+}
+
+.input-search {
+  transition: width 0.5s;
+  width: 0px;
+  display: block;
+  float: left;
+}
+
+.input-search:focus {
+  transition: 0.5s linear;
+  width: 180px;
+  color: black;
+}
+
+.text-search {
+  margin: 0px;
+  padding: 0px;
+  opacity: 0.7;
+  margin-left: 25px;
+}
+
+.text-search:hover {
+  opacity: 1;
+}
+
+.set-icon-search {
+  display: none;
+}
+
+.set-icon-search-input-hide {
+  display: none;
+}
+
+.set-icon-search-input-show {
+  float: right;
+  display: block;
+  margin-left: 5px;
+  margin-top: 4px;
+}
+
+.arrow-suggestion {
+  top: 35px;
+  left: unset;
+  right: unset;
+}
+
+.sugestion-search {
+  top: 55px;
+  width: 180px;
+  left: unset;
+  right: unset;
 }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
 import {allTextToSearchPolish, allTextToSearchEnglish} from '../../Resources/Search-Key.js';
-import ArrowSugestionSearch from '../../Images/Arrow-Suggestion-Search.png';
+import SuggestionArea from './Suggestion-Area.js'
 import GlyphiconSearch from '../../Images/Glyphicon-Search.png';
 
 export default class SearchInput extends Component {
@@ -11,8 +11,8 @@ export default class SearchInput extends Component {
         this.textInput = React.createRef();
         this.state = {
             showSuggestionArea: false,
-            textToSearchInput : this.props.language === 'Polski' ? allTextToSearchPolish : allTextToSearchEnglish,
-            onBlurActive: false
+            onBlurActive: false,
+            textSuggestion: this.props.language === 'Polski' ? allTextToSearchPolish : allTextToSearchEnglish,
         }
     }
 
@@ -27,14 +27,12 @@ export default class SearchInput extends Component {
         this.textInput.current.focus();
     }
 
-    showSuggestionSearch(e) {
-        this.setState({
-            showSuggestionArea: true
-        })
+    showSuggestionSearch(e){
         const text = e.currentTarget.value;
         const textToSearchInput = this.getFilteredSuggestions(text)
         this.setState({
-            textToSearchInput
+            showSuggestionArea: true,
+            textSuggestion: textToSearchInput
         })
     }
 
@@ -51,6 +49,9 @@ export default class SearchInput extends Component {
 
     hideOninput(){
         if(this.state.onBlurActive) {
+            this.setState({
+                showSuggestionArea: false
+            })
             this.props.hideOnInput();
         }
     }
@@ -60,35 +61,7 @@ export default class SearchInput extends Component {
             <div>
                 <input ref={this.textInput} onInput={this.showSuggestionSearch.bind(this)} onBlur={this.hideOninput.bind(this)} className="input-search"/>
                 <img className="set-icon-search-input-show" src={GlyphiconSearch} alt="glyphicon-search"/>
-                <div>
-                    <img className={this.state.showSuggestionArea ? "arrow-suggestion" : "arrow-suggestion-hide" } src={ArrowSugestionSearch} alt="suggestionn"/>
-                    <div className={this.state.showSuggestionArea ? "sugestion-search" :"sugestion-search-hide"}> 
-                        {this.state.textToSearchInput.length > 0 ?
-                            this.state.textToSearchInput.map((text) => {
-                                return (
-                                    <div className="content-suggestion" key={text.id}>
-                                        <a href={text.src}>{text.text}</a>
-                                        <div className="underline-sugesstion"/>
-                                    </div>
-                                )
-                            }):
-                            <div className="content-suggestion">
-                                <a>{this.props.language === 'Polski' ? 'Nie znaleziono' : 'Not found'}</a>
-                                <div className="underline-sugesstion"/>
-                            </div>
-                        }
-                        <div className="content-suggestion">
-                            <a className="show-more">
-                                <p>{this.props.language === 'Polski' ? 
-                                    'Pokaż więcej' :
-                                    'Show more'
-                                    }
-                                </p>
-                            </a>
-                            <div className="underline-sugesstion"/>
-                        </div>
-                    </div>
-                </div>
+                {this.state.showSuggestionArea ? <SuggestionArea textToSearchInput={this.state.textSuggestion} textSuggestion={this.state.SuggestionArea} showSuggestionArea={this.state.showSuggestionArea} language={this.props.language} /> : null}
             </div>
         )
     }
